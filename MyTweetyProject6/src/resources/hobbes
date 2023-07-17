@@ -5,3 +5,5 @@ dangerous(X) -< tiger(X).
 tiger(hobbes).
 baby(hobbes).
 pet(hobbes).
+
+

@@ -2,6 +2,7 @@ package org.tweetyproject.arg.delp.examples;
 
 /*
  *  This file is part of "TweetyProject", a collection of Java libraries for
+
  *  logical aspects of artificial intelligence and knowledge representation.
  *
  *  TweetyProject is free software: you can redistribute it and/or modify
@@ -41,13 +42,69 @@ import org.tweetyproject.logics.fol.syntax.FolFormula;
 public class DeLPExample {
 	public static void main(String[] args) throws FileNotFoundException, ParserException, IOException{
 		DelpParser parser = new DelpParser();
-		DefeasibleLogicProgram delp = parser.parseBeliefBaseFromFile(DeLPExample.class.getResource("/birds2.txt").getFile());
+		DefeasibleLogicProgram delp = parser.parseBeliefBaseFromFile(DeLPExample.class.getResource("/resources/NonConsent").getFile());
 		DelpReasoner reasoner = new DelpReasoner(new GeneralizedSpecificity());
 		
-		FolFormula query = (FolFormula) parser.parseFormula("Fly(opus)");
+		/*FolFormula query = (FolFormula) parser.parseFormula("ConsentGivenBy(patient)");
 		System.out.println(query + "\t" + reasoner.query(delp,query));
 		
-		query = (FolFormula) parser.parseFormula("Fly(tweety)");
+		query = (FolFormula) parser.parseFormula("ConsentGivenTo(telehealthserviceserver)");
 		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("Consent(patient)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("~ValidConsent(patient, telehealthserviceserver)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("~ActiveConsent(patient)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("ExplicitConsent(patient)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("SpecificPurposeConsent(patient)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("~DurationLimitedConsent(patient)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("InformedConsent(patient)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("ResponsibleForConsent(telehealthserviceserver)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("ObtainConsent(telehealthserviceserver)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("~CompliantWithGDPR(patient, telehealthserviceserver)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("NonConsent(patient)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("InvalidConsent(patient)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));*/
+		
+		FolFormula query = (FolFormula) parser.parseFormula("ConsentCompliance(telehealthserviceserver, patient1)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("~ConsentCompliance(telehealthserviceserver, patient2)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("ConsentCompliance(telehealthserviceserver, patient3)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		query = (FolFormula) parser.parseFormula("~ConsentCompliance(telehealthserviceserver, patient3)");
+		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		
+	
+		
+		
+		
+		
+		
 	}
 }

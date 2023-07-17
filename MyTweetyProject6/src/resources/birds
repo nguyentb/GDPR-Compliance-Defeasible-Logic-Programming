@@ -9,3 +9,4 @@ Flies(X) -< Bird(X).
 ~Flies(X) -< Chicken(X).
 Flies(X) -< Chicken(X), Scared(X).
 Nests_in_trees(X) -< Flies(X).
+
