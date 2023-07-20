@@ -90,7 +90,7 @@ public class DeLPExample {
 		FolFormula query = (FolFormula) parser.parseFormula("ConsentCompliance(telehealthserviceserver, patient1)");
 		System.out.println(query + "\t" + reasoner.query(delp,query));
 		
-		query = (FolFormula) parser.parseFormula("~ConsentCompliance(telehealthserviceserver, patient2)");
+		query = (FolFormula) parser.parseFormula("ConsentCompliance(telehealthserviceserver, patient2)");
 		System.out.println(query + "\t" + reasoner.query(delp,query));
 		
 		query = (FolFormula) parser.parseFormula("ConsentCompliance(telehealthserviceserver, patient3)");
@@ -98,6 +98,8 @@ public class DeLPExample {
 		
 		query = (FolFormula) parser.parseFormula("~ConsentCompliance(telehealthserviceserver, patient3)");
 		System.out.println(query + "\t" + reasoner.query(delp,query));
+		
+		
 		
 		
 	

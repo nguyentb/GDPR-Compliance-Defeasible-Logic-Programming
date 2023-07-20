@@ -1,40 +1,25 @@
-Element(Consent).
+ConsentCompliance(X, Y) -< DataSubject(Y), DataController(X), ConsentGiven(Y, X).
+~ValidConsent(X, Y) -< ConsentGiven(Y, X), RevokeConsent(Y, X).
+cannot_process_data(X, Y) -< RevokeConsent(Y, X).
+
+~ConsentCompliance(X, Y) <- DataSubject(Y), DataController(X), ConsentGiven(Y, X), ConsentExpired(Y, X).
+~ConsentCompliance(X, Y) <- DataSubject(Y), DataController(X), ConsentGiven(Y, X), RevokeConsent(Y, X).
+~ConsentCompliance(X, Y) <- DataSubject(Y), DataController(X), ConsentGiven(Y, X), RevokeConsent(Y, X), cannot_process_data(X, Y).
+RevokeConsent(Y,X) <- Revoke(Y).
+RevokeConsent(Y, X) <- ConsentExpired(Y, X).
+~cannot_process_data(X, Y) <- RevokeConsent(Y, X), emergency_situation(Y).
+ValidConsent(X, Y) <- ConsentGiven(Y, X), ActiveConsent(Y, X), SpecificPurposeConsent(Y, X), ExplicitConsent(Y, X).
+ActiveConsent(Y, X) <- ConsentGiven(Y, X), ~RevokeConsent(Y, X).
+SpecificPurposeConsent(Y, X) <- ConsentGiven(Y, X), PurposeType("Specific").
+ExplicitConsent(Y, X) <- ConsentGiven(Y, X), ConsentType("Explicit").
+
 DataSubject(patient1).
 DataSubject(patient2).
 DataSubject(patient3).
 DataController(telehealthserviceserver).
-ConsentExpired(patient1, telehealthserviceserver).
 ConsentGiven(patient1, telehealthserviceserver).
-RevokeConsent(patient1, telehealthserviceserver).
-ConsentExpired(patient2, telehealthserviceserver).
+ConsentExpired(patient1, telehealthserviceserver).
 ConsentGiven(patient2, telehealthserviceserver).
-RevokeConsent(patient2, telehealthserviceserver).
-ConsentExpired(patient3, telehealthserviceserver).
-~ConsentGiven(patient3, telehealthserviceserver).
+ValidConsent(telehealthserviceserver, patient2).
+~RevokeConsent(patient2, telehealthserviceserver).
 RevokeConsent(patient3, telehealthserviceserver).
-Informed(Consent).
-FreelyGiven(Consent).
-PurposeType("Specific").
-ConsentType("Explicit").
-DurationType("Limited").
-
-
-ConsentCompliance(X, Y1) -< DataSubject(Y1), DataController(X), ConsentGiven(Y1, X).
-ConsentCompliance(X, Y2) -< DataSubject(Y1), DataController(X), ConsentGiven(Y2, X).
-ConsentCompliance(X, Y3) -< DataSubject(Y1), DataController(X), ConsentGiven(Y3, X).
-~ValidConsent(X, Y1) -< ConsentGiven(Y1, X), RevokeConsent(Y1, X).
-
-~ConsentCompliance(X, Y1) <- DataSubject(Y1), DataController(X), ConsentGiven(Y1, X), ConsentExpired(Y1, X).
-~ConsentCompliance(X, Y1) <- DataSubject(Y1), DataController(X), ConsentGiven(Y1, X), RevokeConsent(Y1, X).
-RevokeConsent(Y1, X) <- ConsentExpired(Y1, X).
-~ConsentCompliance(X, Y1) <- DataSubject(Y1), DataController(X), ConsentGiven(Y1, X), ~ConsentType("Explicit").
-~ConsentCompliance(X, Y2) <- DataSubject(Y2), DataController(X), ConsentGiven(Y2, X), ~ConsentType("Explicit").
-~ConsentCompliance(X, Y3) <- DataSubject(Y3), DataController(X), ConsentGiven(Y3, X), ~ConsentType("Explicit").
-~ConsentCompliance(X, Y1) <- DataSubject(Y1), DataController(X), ConsentGiven(Y1, X), ~PurposeType("Specific").
-~ConsentCompliance(X, Y1) <- DataSubject(Y1), DataController(X), ConsentGiven(Y1, X), ~DurationType("Limited").
-ValidConsent(X, Y1) <- ConsentGiven(Y1, X), ActiveConsent(X, Y), InformedConsent(X, Y), FreelyGivenConsent(X, Y), SpecificPurposeConsent(X, Y).
-ActiveConsent(Y1, X) <- ConsentGiven(Y1, X), ~RevokeConsent(Y, X).
-InformedConsent(Y1, X) <- ConsentGiven(Y1, X), Informed(Consent).
-FreelyGivenConsent(Y1, X) <- ConsentGiven(Y1, X), FreelyGiven(Consent).
-SpecificPurposeConsent(Y1, X) <- ConsentGiven(Y1, X), PurposeType("Specific").
-
