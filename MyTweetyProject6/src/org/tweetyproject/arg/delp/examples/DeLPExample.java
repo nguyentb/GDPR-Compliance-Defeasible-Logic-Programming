@@ -45,48 +45,6 @@ public class DeLPExample {
 		DefeasibleLogicProgram delp = parser.parseBeliefBaseFromFile(DeLPExample.class.getResource("/resources/NonConsent").getFile());
 		DelpReasoner reasoner = new DelpReasoner(new GeneralizedSpecificity());
 		
-		/*FolFormula query = (FolFormula) parser.parseFormula("ConsentGivenBy(patient)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("ConsentGivenTo(telehealthserviceserver)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("Consent(patient)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("~ValidConsent(patient, telehealthserviceserver)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("~ActiveConsent(patient)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("ExplicitConsent(patient)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("SpecificPurposeConsent(patient)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("~DurationLimitedConsent(patient)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("InformedConsent(patient)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("ResponsibleForConsent(telehealthserviceserver)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("ObtainConsent(telehealthserviceserver)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("~CompliantWithGDPR(patient, telehealthserviceserver)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("NonConsent(patient)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));
-		
-		query = (FolFormula) parser.parseFormula("InvalidConsent(patient)");
-		System.out.println(query + "\t" + reasoner.query(delp,query));*/
-		
 		FolFormula query = (FolFormula) parser.parseFormula("ConsentCompliance(telehealthserviceserver, patient1)");
 		System.out.println(query + "\t" + reasoner.query(delp,query));
 		
