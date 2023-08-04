@@ -1,0 +1,25 @@
+ConsentCompliance(X, Y) -< DataSubject(Y), DataController(X), ConsentGiven(Y, X).
+~ValidConsent(X, Y) -< ConsentGiven(Y, X), RevokeConsent(Y, X).
+cannot_process_data(X, Y) -< RevokeConsent(Y, X).
+
+~ConsentCompliance(X, Y) <- DataSubject(Y), DataController(X), ConsentGiven(Y, X), ConsentExpired(Y, X).
+~ConsentCompliance(X, Y) <- DataSubject(Y), DataController(X), ConsentGiven(Y, X), RevokeConsent(Y, X).
+~ConsentCompliance(X, Y) <- DataSubject(Y), DataController(X), ConsentGiven(Y, X), RevokeConsent(Y, X), cannot_process_data(X, Y).
+RevokeConsent(Y,X) <- Revoke(Y).
+RevokeConsent(Y, X) <- ConsentExpired(Y, X).
+~cannot_process_data(X, Y) <- RevokeConsent(Y, X), emergency_situation(Y).
+ValidConsent(X, Y) <- ConsentGiven(Y, X), ActiveConsent(Y, X), SpecificPurposeConsent(Y, X), ExplicitConsent(Y, X).
+ActiveConsent(Y, X) <- ConsentGiven(Y, X), ~RevokeConsent(Y, X).
+SpecificPurposeConsent(Y, X) <- ConsentGiven(Y, X), PurposeType("Specific").
+ExplicitConsent(Y, X) <- ConsentGiven(Y, X), ConsentType("Explicit").
+
+DataSubject(patient1).
+DataSubject(patient2).
+DataSubject(patient3).
+DataController(telehealthserviceserver).
+ConsentGiven(patient1, telehealthserviceserver).
+ConsentExpired(patient1, telehealthserviceserver).
+ConsentGiven(patient2, telehealthserviceserver).
+ValidConsent(telehealthserviceserver, patient2).
+~RevokeConsent(patient2, telehealthserviceserver).
+RevokeConsent(patient3, telehealthserviceserver).
